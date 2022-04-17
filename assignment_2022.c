@@ -15,6 +15,8 @@ typedef struct
 
 void DisplayList();
 
+void CombineList(Employee [], int);
+
 void SortBySurname();
 
 int main()
@@ -123,21 +125,32 @@ void DisplayList()
 	team_D[3].line = 1;
 
 	// Displaying Lists
-	printf("TEAM A\n\nID\t    NAME\n");
+	printf("\nTEAM A\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
 	{
 		printf("%d\t%s, %s\n", team_A[i].id, team_A[i].surname, team_A[i].firstname);
 	}
+
+	printf("\n\nTEAM B\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
 	{
 		printf("%d\t%s, %s\n", team_B[i].id, team_B[i].surname, team_B[i].firstname);
 	}
+	
+	printf("\n\nTEAM C\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
 	{
 		printf("%d\t%s, %s\n", team_C[i].id, team_C[i].surname, team_C[i].firstname);
 	}
+
+	printf("\n\nTEAM D\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
 	{
 		printf("%d\t%s, %s\n", team_D[i].id, team_D[i].surname, team_D[i].firstname);
 	}
+}
+
+void CombineList(Employee e[], int n)
+{
+	
 }
