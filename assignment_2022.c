@@ -12,6 +12,13 @@ typedef struct
 	int line;
 } Employee;
 
+Employee team_A[SIZE];
+Employee team_B[SIZE];
+Employee team_C[SIZE];
+Employee team_D[SIZE];
+
+
+
 void DisplayList();
 
 void CombineList(Employee [], int);
@@ -20,9 +27,17 @@ void SelectionSortSurname(Employee emp[]);
 
 int main()
 {
-	// TEAM A
-	static Employee team_A[SIZE];
+	DisplayList();
 
+	SelectionSortSurname(&team_A[4]);
+	
+	return 0;
+}
+
+// Displays List of Employees before sort
+void DisplayList()
+{
+	// TEAM A
 	team_A[0].id = 101;
 	strcpy(team_A[0].firstname, "Roxy");
 	strcpy(team_A[0].surname, "Migurdia");
@@ -44,9 +59,9 @@ int main()
 	team_A[3].line = 3;
 
 
-	// TEAM B
-	static Employee team_B[SIZE];
 
+
+	// TEAM B
 	team_B[0].id = 105;
 	strcpy(team_B[0].firstname, "Anja");
 	strcpy(team_B[0].surname, "Prokopios");
@@ -68,9 +83,9 @@ int main()
 	team_B[3].line = 2;
 
 
-	// TEAM C
-	Employee team_C[SIZE];
 
+
+	// TEAM C
 	team_C[0].id = 109;
 	strcpy(team_C[0].firstname, "Ayaan");
 	strcpy(team_C[0].surname, "Dariusz");
@@ -92,9 +107,9 @@ int main()
 	team_C[3].line = 1;
 
 
-	// TEAM D
-	Employee team_D[SIZE];
 
+
+	// TEAM D
 	team_D[0].id = 113;
 	strcpy(team_D[0].firstname, "Chikako");
 	strcpy(team_D[0].surname, "Faelan");
@@ -114,16 +129,8 @@ int main()
 	strcpy(team_D[3].firstname, "Dima");
 	strcpy(team_D[3].surname, "Aristocles");
 	team_D[3].line = 1;
-	DisplayList();
 
-	SelectionSortSurname(&team_A[4]);
 	
-	return 0;
-}
-
-// Displays List of Employees before sort
-void DisplayList()
-{
 	// Displaying Lists
 	printf("\nTEAM A\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
