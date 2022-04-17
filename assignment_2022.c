@@ -122,8 +122,22 @@ void DisplayList()
 	strcpy(team_D[3].surname, "Aristocles");
 	team_D[3].line = 1;
 
+	// Displaying Lists
+	printf("TEAM A\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
 	{
-		printf("%d\t %s %s\t %d\n", team_A[i].id, team_A[i].firstname, team_A[i].surname, team_A[i].line);
+		printf("%d\t%s, %s\n", team_A[i].id, team_A[i].surname, team_A[i].firstname);
+	}
+	for (int i = 0; i < SIZE; i++)
+	{
+		printf("%d\t%s, %s\n", team_B[i].id, team_B[i].surname, team_B[i].firstname);
+	}
+	for (int i = 0; i < SIZE; i++)
+	{
+		printf("%d\t%s, %s\n", team_C[i].id, team_C[i].surname, team_C[i].firstname);
+	}
+	for (int i = 0; i < SIZE; i++)
+	{
+		printf("%d\t%s, %s\n", team_D[i].id, team_D[i].surname, team_D[i].firstname);
 	}
 }
