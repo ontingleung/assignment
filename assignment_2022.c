@@ -10,27 +10,18 @@ typedef struct
 	char firstname[20];
 	char surname[20];
 	int line;
-
 } Employee;
 
 void DisplayList();
 
 void CombineList(Employee [], int);
 
-void SortBySurname();
+void SelectionSortSurname(Employee emp[]);
 
 int main()
 {
-	DisplayList();
-	
-	return 0;
-}
-
-// Displays List of Employees before sort
-void DisplayList()
-{
 	// TEAM A
-	Employee team_A[SIZE];
+	static Employee team_A[SIZE];
 
 	team_A[0].id = 101;
 	strcpy(team_A[0].firstname, "Roxy");
@@ -54,7 +45,7 @@ void DisplayList()
 
 
 	// TEAM B
-	Employee team_B[SIZE];
+	static Employee team_B[SIZE];
 
 	team_B[0].id = 105;
 	strcpy(team_B[0].firstname, "Anja");
@@ -123,7 +114,16 @@ void DisplayList()
 	strcpy(team_D[3].firstname, "Dima");
 	strcpy(team_D[3].surname, "Aristocles");
 	team_D[3].line = 1;
+	DisplayList();
 
+	SelectionSortSurname(&team_A[4]);
+	
+	return 0;
+}
+
+// Displays List of Employees before sort
+void DisplayList()
+{
 	// Displaying Lists
 	printf("\nTEAM A\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
@@ -153,4 +153,9 @@ void DisplayList()
 void CombineList(Employee e[], int n)
 {
 	
+}
+
+void SelectionSortSurname(Employee emp[])
+{
+
 }
