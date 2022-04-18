@@ -16,26 +16,16 @@ Employee team_A[SIZE];
 Employee team_B[SIZE];
 Employee team_C[SIZE];
 Employee team_D[SIZE];
-
+Employee fullList[EMPLOYED];
 
 
 void DisplayList();
 
 void CombineList(Employee [], int);
 
-void SelectionSortSurname(Employee emp[]);
+void SelectionSortSurname(Employee []);
 
 int main()
-{
-	DisplayList();
-
-	SelectionSortSurname(&team_A[4]);
-	
-	return 0;
-}
-
-// Displays List of Employees before sort
-void DisplayList()
 {
 	// TEAM A
 	team_A[0].id = 101;
@@ -130,7 +120,18 @@ void DisplayList()
 	strcpy(team_D[3].surname, "Aristocles");
 	team_D[3].line = 1;
 
+	DisplayList();
+
+	SelectionSortSurname(team_D);
 	
+	DisplayList();
+
+	return 0;
+}
+
+// Displays List of Employees before sort
+void DisplayList()
+{
 	// Displaying Lists
 	printf("\nTEAM A\n\nID\t    NAME\n");
 	for (int i = 0; i < SIZE; i++)
@@ -162,7 +163,51 @@ void CombineList(Employee e[], int n)
 	
 }
 
+// Selection Sort
 void SelectionSortSurname(Employee emp[])
 {
+	Employee temp;
 
+	for(int i = 0; i < SIZE - 1; i++)
+	{
+		int j_min = i;
+		for (int j = i + 1; j < SIZE; j++)
+		{
+			if(strcmp(emp[j].surname, emp[j_min].surname) < 0)
+			{
+				j_min = j;
+			} 
+		}
+
+		if (j_min != i)
+		{
+			temp = emp[i];
+			emp[i] = emp[j_min];
+			emp[j_min] = temp;
+		}
+	}
 }
+
+
+// printf("%s", emp[1].surname);
+
+// 	char temp[20];
+
+	
+// 	printf("%s", emp[1].surname);
+
+
+
+
+// for(int i = 0; i < SIZE - 1; i++)
+// 	{
+// 		for(int j = i + 1; j < SIZE; j++)
+// 		{
+// 			if(emp[i].surname > emp[j].surname)
+// 			{
+// 				temp = emp[i];
+// 				emp[i] = emp[j];
+// 				emp[j] = temp;
+// 			}
+// 		}
+// 	}
