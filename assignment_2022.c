@@ -17,16 +17,24 @@ Employee team_B[SIZE];
 Employee team_C[SIZE];
 Employee team_D[SIZE];
 Employee fullList[EMPLOYED];
+Employee fullTemp[EMPLOYED];
+
 
 
 void DisplayList();
+void CombineList();
+int binarySearch(Employee [], Employee, int, int);
+void insertionSort(Employee [], int);
+void merge(Employee [], Employee [], int, int, int);
+void mergeSort(Employee [], Employee [], int, int, int);
 
-void CombineList(Employee [], int);
 
-void SelectionSortSurname(Employee []);
 
 int main()
 {
+
+/* START OF TEAM LISTS */
+
 	// TEAM A
 	team_A[0].id = 101;
 	strcpy(team_A[0].firstname, "Roxy");
@@ -120,14 +128,19 @@ int main()
 	strcpy(team_D[3].surname, "Aristocles");
 	team_D[3].line = 1;
 
+/* END OF TEAM LISTS */
+
+	// DisplayList();
+	CombineList();
 	DisplayList();
 
-	SelectionSortSurname(team_D);
+	mergeSort(fullList, fullTemp, 0, EMPLOYED, 4);
+
+	DisplayList();
 	
-	DisplayList();
-
 	return 0;
 }
+
 
 // Displays List of Employees before sort
 void DisplayList()
@@ -156,58 +169,116 @@ void DisplayList()
 	{
 		printf("%d\t%s, %s\n", team_D[i].id, team_D[i].surname, team_D[i].firstname);
 	}
-}
 
-void CombineList(Employee e[], int n)
-{
-	
-}
-
-// Selection Sort
-void SelectionSortSurname(Employee emp[])
-{
-	Employee temp;
-
-	for(int i = 0; i < SIZE - 1; i++)
+	printf("\n\nFull List\n\nID\t    NAME\n");
+	for (int i = 0; i < EMPLOYED; i++)
 	{
-		int j_min = i;
-		for (int j = i + 1; j < SIZE; j++)
-		{
-			if(strcmp(emp[j].surname, emp[j_min].surname) < 0)
-			{
-				j_min = j;
-			} 
-		}
+		printf("%d\t%s, %s\n", fullList[i].id, fullList[i].surname, fullList[i].firstname);
+	}
+}
 
-		if (j_min != i)
+int binarySearch(Employee emp[], Employee item, int low, int high)
+{
+	while (low <= high)
+	{
+		int mid = (low + (high -low) / 2);
+		if (strcmp(item.surname, emp[mid].surname) == 0)
+			return mid + 1;
+		else if (strcmp(item.surname, emp[mid].surname) > 0)
+			low = mid + 1;
+		else
+			high = mid - 1;
+	}
+
+	return low;
+}
+
+void insertionSort(Employee emp[], int length)
+{
+	int i, loc, j;
+	Employee selected;
+
+	for (i = 1; i < length; i++)
+	{
+		j = i - 1;
+		selected = emp[i];
+
+		// find location where selected should be inserted
+		loc = binarySearch(emp, selected, 0, j);
+
+		// move all elements after location to create space
+		while (j >= loc)
 		{
-			temp = emp[i];
-			emp[i] = emp[j_min];
-			emp[j_min] = temp;
+			emp[j + 1] = emp[j];
+			j--;
+		}
+		emp[j + 1] = selected;
+	}
+}
+
+void merge(Employee emp[], Employee temp[], int l, int m, int r)
+{
+	int i = l;
+	int j = m + 1;
+	int k = l;
+	while ((i <= m) && (j <= r))
+	{
+		if (strcmp(emp[i].surname, emp[j].surname) < 0)
+		{
+			temp[k] = emp[i];
+			i++;
+		}
+		else
+		{
+			temp[k] = emp[j];
+			j++;
+		}
+		k++;
+	}
+
+	while (j <= r)
+	{
+		temp[k] = emp [j];
+		j++;
+		k++;
+	}
+
+	while (i <= m)
+	{
+		temp[k] = emp [i];
+		i++;
+		k++;
+	}
+	
+	for (i = l; i <= r; i++)
+	{
+		emp[i] = temp[i];
+	}
+}
+
+void mergeSort(Employee emp[], Employee temp[], int l, int r, int threshold)
+{
+	if (l < r)
+	{
+		if ((r - l) <= threshold)
+			insertionSort(emp, r);
+		else
+		{
+			int m = (l + r) / 2;
+			mergeSort(emp, temp, l, m, threshold);
+			mergeSort(emp, temp, m + 1, r, threshold);
+			merge(emp, temp, l, m, r);
 		}
 	}
 }
 
-
-// printf("%s", emp[1].surname);
-
-// 	char temp[20];
-
-	
-// 	printf("%s", emp[1].surname);
-
-
-
-
-// for(int i = 0; i < SIZE - 1; i++)
-// 	{
-// 		for(int j = i + 1; j < SIZE; j++)
-// 		{
-// 			if(emp[i].surname > emp[j].surname)
-// 			{
-// 				temp = emp[i];
-// 				emp[i] = emp[j];
-// 				emp[j] = temp;
-// 			}
-// 		}
-// 	}
+void CombineList()
+{
+	for(int i = 0; i < SIZE; i++)
+	{
+		fullList[i] = team_A[i];
+		fullList[i + SIZE] = team_B[i];
+		fullList[i + (SIZE * 2)] = team_C[i];
+		fullList[i + (SIZE * 3)] = team_D[i];
+	}
+} 
